@@ -37,13 +37,44 @@
         <title>Hello World</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+    <main class="container">
+        <section class="section">
+            <h2>About Me</h2>
+            <p>
+                I am John Ryan Uy, currently a 3rd Year IT student at Xavier University Ateneo de Cagayan.
+                By exploring and tinkering around HTML, CSS, and a little bit of Javascript,
+                I have created projects that best fit my ideas.
+            </p>
+
+            <div>
+                <img
+                        class="profile-image"
+                        src="img/profile1.jpg"
+                        alt="A simple profile icon"
+                        width="320"
+                        height="320"
+                >
+
+                <section class="card">
+                    <p><strong>Contact:</strong></p>
+                    <ul>
+                        <li>GitHub: <a href="https://github.com/uy-johnryan">github.com/uy-johnryan</a></li>
+                        <li>Email: <a href="https://20220025789@my.xu.edu.ph">jru6characters@gmail.com</a></li>
+                    </ul>
             </div>
+            </p>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <nav class="site-nav" aria-label="Primary">
+                <a href="index.html">About Me</a>
+                <a href="skills.html">Skills</a>
+                <a href="Education.html">Education</a>
+            </nav>
         </div>
+    </footer>
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>

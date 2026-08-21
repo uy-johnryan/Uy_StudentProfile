@@ -116,3 +116,160 @@ h1 {
         background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
     }
 }
+
+  :root {
+    --bg: #ffffff;
+    --card-bg: #fff;
+    --text: #080808;
+    --border: #4E387e;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    font-family: Georgia;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+
+  .site-footer {
+    border-bottom: 1px solid var(--border);
+    background: var(--border);
+  }
+
+  .site-title {
+    justify-self: center;
+    margin: 0;
+    font-size: 30px;
+  }
+
+  .site-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .site-nav a {
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+/* for nav links to stay in fixed position below*/
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.project {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* for projects html (technically 2nd .card) */
+}
+
+/*projects html page cursor hover*/
+.project {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* POP EFFECT */
+.project:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--text);
+
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+/* hide link which willthen reveal when cursor hovers a project */
+.project:hover .project-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section {
+  margin: 40px 0;
+}
+
+  .profile-image {
+    display: block;
+    margin-top: 12px;
+    max-width: 100%;
+    height: auto;
+    border: 1px dashed #aaa;
+    border-radius: 10px;
+  }
+
+  .skills-grid {
+    display: grid;
+    gap: 110px;   /*creates a gap betwewen the skills text and photo*/
+    align-items: start;
+  }
+
+  @media (min-width: 800px) {
+    .skills-grid {
+      grid-template-columns: 0.7fr 1fr;
+      align-items: center;
+    }
+  }
+
+
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tag {
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 10px;
+    background: #fff;
+    font-size: 13px;
+  }
+
+  .hero-banner {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 1px dashed #aaa;
+    border-radius: 10px;
+  }
