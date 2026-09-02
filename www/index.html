@@ -1,81 +1,224 @@
-<!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+    <!DOCTYPE html>
+    <!--
+        Licensed to the Apache Software Foundation (ASF) under one
+        or more contributor license agreements.  See the NOTICE file
+        distributed with this work for additional information
+        regarding copyright ownership.  The ASF licenses this file
+        to you under the Apache License, Version 2.0 (the
+        "License"); you may not use this file except in compliance
+        with the License.  You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-    <main class="container">
-        <section class="section">
-            <h2>About Me</h2>
-            <p>
-                I am John Ryan Uy, currently a 3rd Year IT student at Xavier University Ateneo de Cagayan.
-                By exploring and tinkering around HTML, CSS, and a little bit of Javascript,
-                I have created projects that best fit my ideas.
-            </p>
+        Unless required by applicable law or agreed to in writing,
+        software distributed under the License is distributed on an
+        "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+         KIND, either express or implied.  See the License for the
+        specific language governing permissions and limitations
+        under the License.
+    -->
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <!--
+            Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
+                https://cordova.apache.org/docs/en/latest/
+            Some notes:
+                * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+                * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                    * Enable inline JS: add 'unsafe-inline' to default-src
+            -->
+            <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+            <meta name="format-detection" content="telephone=no">
+            <meta name="msapplication-tap-highlight" content="no">
+            <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+            <meta name="color-scheme" content="light dark">
+            <link rel="stylesheet" href="css/index.css">
+            <title>johnryanuy.net</title>
+        </head>
+        <body>
+        <!-- ==================== NAVIGATION ==================== -->
+        <header class="site-header">
+            <div class="container">
+                <nav class="site-nav" aria-label="Primary">
+                    <!-- the nav links will navigate within same page, as of now no Javascript-->     
+                    <a href="#about">About Me</a>
+                    <a href="#skills">Skills</a>    
+                    <a href="#education">Education</a>
+                </nav>  
+            </div>
+        </header>
+            
+            <!-- ==================== ABOUT ME ==================== -->
+            <main id="about" class="container">
+                <section class="section">
+                    <h2>About Me</h2>
+                    
+                    <p>
+                        I am John Ryan Uy, I am 20 years old
+                        as of 2026 and I am a sibling of 5. I am currently a 3rd Year BSIT student
+                        at Xavier University Ateneo de Cagayan. By exploring and tinkering around HTML, CSS,
+                        and a little bit of Javascript, I have created
+                        projects that best fit my ideas. I plan on purusing the field of Web Development.
 
-            <div>
-                <img
-                        class="profile-image"
-                        src="img/profile1.jpg"
-                        alt="A simple profile icon"
-                        width="320"
-                        height="320"
-                >
+
+                    </p>
+
+                    <p>
+                        On the side, My interests are playing basketball, chess, video games, listening to music, pickleball, and badminton. For now though, I have not been 
+                        playing basketball that much as our ball got flat, only the other sports and hobbies. As for my goals
+                        and aspirations, it is to be successful, to be able to give something good to the community,
+                        to enjoy each step or every moment of life, and to make the best of what is given to us in this World.
+                    </p>
+
+                    <div>
+                        <img
+                            class="profile-image"
+                            src="img/profile1.jpg"
+                            alt="A simple profile icon"
+                            width="320"
+                            height="320"
+                        >
+
+                        <section class="card">
+                            <p><strong>Contact:</strong></p>
+
+                            <ul>
+                                <li>
+                                    GitHub:
+                                    <a href="https://github.com/uy-johnryan">
+                                        github.com/uy-johnryan
+                                    </a>
+                                </li>
+
+                                <li>
+                                    Email:      
+                                    <a href="mailto:johnryan.m.uy@gmail.com">
+                                        johnryan.m.uy@gmail.com
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+
+                </section>
+
+            </main>
+
+
+        <!-- ==================== SKILLS ==================== -->
+
+        <main id="skills" class="container skills-grid">
+            <section class="section">
+
+                <h1>Skills</h1> 
+
+                <ul>    
+                    <li>Semantic HTML and accessibility basics</li>
+                    <li>CSS Flexbox and Grid layouts</li>       
+                    <li>Organizing folders and fixing relative paths</li>
+                    <li>Debugging broken links, images, and styles</li>
+                    <li>Ability to use version control system such as Git</li>
+                </ul>
+
+                <ul class="tag-list">
+                    <li class="tag">HTML</li>
+                    <li class="tag">CSS</li>
+                    <li class="tag">Responsive Layout</li>
+                    <li class="tag">Debugging</li>
+                </ul>
+
+
+                <h1>Programming Languages & Tools</h1>
+
+                <ul>
+                    <li>Python</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>Javascript</li>
+                </ul>
+
+            </section>
+
+            <aside>
+
+                <div class="hero-media">
+
+                    <img
+                        class="hero-banner"
+                        src="img/banner/hero-banner.jpg"
+                        alt="Laptop with code on screen"
+                        width="1120"
+                        height="560"
+                    >
+
+                </div>
+            </aside>
+        </main>
+
+
+        <!-- ==================== EDUCATION ==================== -->
+
+        <main id="education" class="container">
+            <section class="section">
+
+                <h1>Education</h1>
 
                 <section class="card">
-                    <p><strong>Contact:</strong></p>
-                    <ul>
-                        <li>GitHub: <a href="https://github.com/uy-johnryan">github.com/uy-johnryan</a></li>
-                        <li>Email: <a href="https://20220025789@my.xu.edu.ph">jru6characters@gmail.com</a></li>
-                    </ul>
-            </div>
-            </p>
-        </section>
-    </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <nav class="site-nav" aria-label="Primary">
-                <a href="index.html">About Me</a>
-                <a href="skills.html">Skills</a>
-                <a href="Education.html">Education</a>
-            </nav>
-        </div>
-    </footer>
+                    <h3>Xavier University - Ateneo De Cagayan</h3>
+
+                    <p>August 2024 - Present</p>
+
+                    <ul>
+                        <li>
+                            Currently taking the course Bachelor of Science
+                            in Information Technology (BSIT)
+                        </li>
+                    </ul>
+
+                </section>
+
+
+                <section class="card">
+
+                    <h3>
+                        Xavier University - Ateneo De Cagayan
+                        Senior High School
+                    </h3>
+
+                    <p>August 2022 - May 2024</p>
+
+                    <ul>
+                        <li>Graduated Senior High</li>
+                        <li>Member of Sum of Three Organization</li>
+                    </ul>
+
+                </section>
+
+
+                <section class="card">
+                    <h3>Liceo De Cagayan University</h3>
+                    <p>June 2017 - May 2022</p>
+
+                    <ul>
+                        <li>Graduated with honors</li>
+                        <li>Received the highschool graduation certificate</li>
+                    </ul>
+
+                </section>
+            </section>
+        </main>
+        
+        <footer class = "site-footer">
+            <footer class="site-footer a" aria-label="Primary">
+            <a> Copyright @johnryanuy.net</a>
+            <a> John Ryan Uy</a>
+            <a> BSIT - 3</a>
+        </footer>
+
+
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>
-</html>
+    </html>

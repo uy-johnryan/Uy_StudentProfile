@@ -28,6 +28,8 @@ function onDeviceReady() {
     document.getElementById('deviceready').classList.add('ready');
 }
 
+/*my code below*/
+
 document.addEventListener("DOMContentLoaded", () => {
   const links = document.querySelectorAll(".site-nav a");
 
