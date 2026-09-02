@@ -41,7 +41,7 @@ cordova run android
 cordova emulate android
 ```
 
-7. Application Screenshots
+## 7. Application Screenshots
 
 ### Desktop
 #### About me
