@@ -27,17 +27,3 @@ function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 }
-
-/*my code below*/
-
-document.addEventListener("DOMContentLoaded", () => {
-  const links = document.querySelectorAll(".site-nav a");
-
-  /*nav links mixing with border color once clicked with only white text popping*/
-  links.forEach(link => {
-    if (link.href === window.location.href) {
-      link.style.background = "#4e387e";
-      link.style.color = "#fff";
-    }
-  });
-});
