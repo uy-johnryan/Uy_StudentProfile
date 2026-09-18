@@ -65,12 +65,17 @@ Prerequisites
 - Android Studio & Android SDK (for mobile emulator/device execution)
 
 Execution Steps
-1. Clone the repository:
-git clone [https://github.com/uy-johnryan/Uy_StudentProfile](https://github.com/uy-johnryan/Uy_StudentProfile.git)
-cd Uy_StudentProfile
+1. **Clone the Repository**
+   ```bash
+   git clone [https://github.com/uy-johnryan/Uy_StudentProfile.git](https://github.com/uy-johnryan/Uy_StudentProfile.git)
+   cd Uy_StudentProfile
 
 ## 8. Application Screenshots
-![Student Profile](img/Screenshot_20260918_103754.png)   
+### Student Profile
+![Student Profile](img/Screenshot_20260918_103754.png)
+### Edit Profile   
 ![Edit Profile](img/Screenshot_20260918_103823.png)
+### Updated Profile
 ![Updated Profile](img/Screenshot_20260918_104114.png)
-![Contact](img/Screenshot_20260918_104152.png)
+### Contact
+![Contact](img/Screenshot_20260918_104152.png)  
