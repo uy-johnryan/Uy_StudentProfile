@@ -3,54 +3,58 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>johnryanuy.net</title>
-
+    <title>johnryanuy.net - About</title>
     <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
     <header class="site-header">
         <div class="container">
             <nav class="site-nav" aria-label="Primary">
-                <!-- the nav links will navigate within same page, as of now no Javascript-->     
                 <a href="index.html">Homepage</a>
                 <a href="about.html">About</a>
-                <a href="skills.html">Skills</a>    
-                <a href="Education.html">Education</a>
+                <a href="skills.html">Skills</a>
                 <a href="projects.html">Projects</a>
                 <a href="contact.html">Contact</a>
             </nav>  
         </div>
     </header>
+
     <main class="container">
-        <section class="section" id = "about-me">
-            <h1>About Me</h1>
+        <section class="card" id="about-me">
+            <div class="profile-header-flex">
+                <h1>About Me</h1>
+                <button type="button" id="open-edit-about-btn" class="btn btn-primary">Edit About Me</button>
+            </div>
 
-            <p>
-                I am currently a 3rd Year BSIT student
-                at Xavier University Ateneo de Cagayan, planning on purusing the field of Web Development. By exploring and tinkering around HTML, CSS,
-                and a little bit of Javascript, I have created
-                projects that best fit my ideas. As for my educational background, I studied at Mindanao Christian Gospel Academy for grade school 
-                and Liceo de Cagayan University for junior high school. For senior high school and college, I studied and am currently still studying at Xavier University."
-            </p>
+            <p id="display-about-text">Loading about details...</p>
 
-            <p>
-                On the side, My interests are playing basketball, chess, video games, listening to music, pickleball, and badminton. For now though, I have not been 
-                playing basketball that much as our ball got flat, only the other sports and hobbies. As for my goals
-                and aspirations, it is to be successful, to be able to give something good to the community,
-                to enjoy each step or every moment of life, and to make the best of what is given to us in this World.
-            </p>
-            
-            
+        <!-- Edit About Me Modal -->
+        <div id="edit-about-modal" class="modal-overlay hidden">
+            <div class="modal-content card">
+                <h2>Edit About Me</h2>
+                
+                <div id="about-error-msg" class="error-banner hidden"></div>
 
+                <form id="edit-about-form">
+                    <div class="form-group">
+                        <label for="edit-about-input">About Me Description *</label>
+                        <textarea id="edit-about-input" class="form-control" rows="8" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancel-about-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
-    <footer class = "site-footer">
-        <footer class="site-footer a" aria-label="Primary">
-        <a> Copyright @johnryanuy.net</a>
-        <a> John Ryan Uy</a>
-        <a> BSIT - 3</a>
+    <footer class="site-footer">
+        <span>&copy; johnryanuy.net</span>
+        <span>John Ryan Uy</span>
+        <span>BSIT - 3</span>
     </footer>
-
 
     <script src="cordova.js"></script>
     <script src="js/index.js"></script>

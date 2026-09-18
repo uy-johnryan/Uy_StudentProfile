@@ -3,8 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>johnryanuy.net</title>
-
+    <title>johnryanuy.net - Skills</title>
     <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
@@ -14,62 +13,58 @@
                 <a href="index.html">Homepage</a>
                 <a href="about.html">About</a>
                 <a href="skills.html">Skills</a>
-                <a href="Education.html">Education</a>
                 <a href="projects.html">Projects</a>
                 <a href="contact.html">Contact</a>
             </nav>  
         </div>
     </header>
-<main class = "container skills-grid">
-    <section class="section">
-        <h1>Skills</h1>
-        <ul>
-            <li>Semantic HTML and accessibility basics</li>
-            <li>CSS Flexbox and Grid layouts</li>
-            <li>Organizing folders and fixing relative paths</li>
-            <li>Debugging broken links, images, and styles</li>
-        </ul>
 
-        <ul class="tag-list">
-            <li class="tag">HTML</li>
-            <li class="tag">CSS</li>
-            <li class="tag">Responsive Layout</li>
-            <li class="tag">Debugging</li>
-        </ul>
+    <main class="container skills-grid">
+        <section class="card" id="skills">
+            <div class="profile-header-flex">
+                <h1>My Skills</h1>
+                <button type="button" id="open-edit-skills-btn" class="btn btn-primary">Edit Skills</button>
+            </div>
 
-        <h1>Programming Languages & Tools </h1>
-        <ul>
-            <li> Python </li>
-            <li> HTML </li>
-            <li> CSS </li>
-            <li> Javascript</li>
-    </section>
+            <h3>Technical Skillset</h3>
+            <ul id="display-skills-list" class="tag-list" style="margin-top: 16px;">
+                <!-- Dynamically populated tags -->
+            </ul>
+        </section>
 
+        <aside>
+            <div class="hero-media">
+                <img class="hero-banner" src="img/banner/hero-banner.jpg" alt="Laptop with code on screen" width="1120" height="560" />  
+            </div>
+        </aside>
 
+        <!-- Edit Skills Modal -->
+        <div id="edit-skills-modal" class="modal-overlay hidden">
+            <div class="modal-content card">
+                <h2>Edit Skills</h2>
+                
+                <div id="skills-error-msg" class="error-banner hidden"></div>
 
-    <aside>
-        <div class="hero-media">
+                <form id="edit-skills-form">
+                    <div class="form-group">
+                        <label for="edit-skills-input">Skills (Separated by commas) *</label>
+                        <textarea id="edit-skills-input" class="form-control" rows="4" placeholder="e.g. HTML, CSS, JavaScript, Python, Debugging"></textarea>
+                    </div>
 
-            <img
-                    class="hero-banner"
-                    src="img/banner/hero-banner.jpg"
-                    alt="Laptop with code on screen"
-                    width="1120"
-                    height="560"
-
-
-            />  
+                    <div class="form-actions">
+                        <button type="button" id="cancel-skills-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        </div>
-    </section>
+    </main>
 
-    <footer class = "site-footer">
-        <footer class="site-footer a" aria-label="Primary">
-        <a> Copyright @johnryanuy.net</a>
-        <a> John Ryan Uy</a>
-        <a> BSIT - 3</a>
+    <footer class="site-footer">
+        <span>&copy; johnryanuy.net</span>
+        <span>John Ryan Uy</span>
+        <span>BSIT - 3</span>
     </footer>
-
 
     <script src="cordova.js"></script>
     <script src="js/index.js"></script>

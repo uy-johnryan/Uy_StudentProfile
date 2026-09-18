@@ -1,6 +1,3 @@
-/* ==========================================================================
-   Global Variables & Design Tokens
-   ========================================================================== */
 :root {
   --bg: #f8f9fa;
   --card-bg: #ffffff;
@@ -37,9 +34,7 @@ body {
   padding-bottom: calc(var(--footer-height) + 20px);
 }
 
-/* ==========================================================================
-   Containers & Main Content
-   ========================================================================== */
+/*Containers & Main Content*/
 .container {
   width: 100%;
   max-width: 1000px;
@@ -51,9 +46,7 @@ main {
   flex: 1;
 }
 
-/* ==========================================================================
-   Fixed Header & Navigation
-   ========================================================================== */
+/*Navigation Header*/
 .site-header {
   position: fixed;
   top: 0;
@@ -96,9 +89,7 @@ main {
   box-shadow: 0 2px 8px rgba(106, 27, 154, 0.3);
 }
 
-/* ==========================================================================
-   Cards, Sections, & Images
-   ========================================================================== */
+/*Cards, Sections, & Images*/
 .section {
   margin: 20px 0;
 }
@@ -129,7 +120,19 @@ main {
   text-decoration: underline;
 }
 
-.profile-image, 
+/* Circular Profile Image */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 16px;
+  margin: 16px auto; display: block;
+  border: 3px solid var(--primary); /* Optional accent border */
+  
+}
+
+/* Banner Image (keeps original rectangular shape) */
 .hero-banner {
   width: 100%;
   max-width: 100%;
@@ -139,9 +142,7 @@ main {
   margin-top: 16px;
 }
 
-/* ==========================================================================
-   Skills Grid & Tag List
-   ========================================================================== */
+/* Skills Grid & Tag List*/
 .skills-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -166,9 +167,161 @@ main {
   font-weight: 500;
 }
 
-/* ==========================================================================
-   Fixed Footer
-   ========================================================================== */
+/*Center Profile Card */
+.profile-card {
+  position: relative; /* Required for top-right button positioning */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 20px;
+}
+
+/* Move Edit Button to Top Right */
+#open-edit-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+  
+/* Center Image & Spacing */
+.profile-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 10px auto 16px auto;
+  border: 3px solid var(--primary);
+}
+
+/* Center All Profile Text */
+.profile-card h1,
+.profile-card .subtitle,
+.profile-card .quote,
+.profile-details {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-card .quote {
+  font-style: italic;
+  font-size: 1.05rem;
+  margin-top: 10px;
+  max-width: 600px;
+}
+
+/*Buttons, Edit Profile Modal & Form Controls*/
+.btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #333333;
+}
+
+.btn-secondary:hover {
+  background-color: #d0d0d0;
+}
+
+.profile-header-flex {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-weight: bold;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+.modal-content {
+  max-width: 550px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.form-group {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.form-control {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.error-banner {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* Fixed Footer*/
 .site-footer {
   position: fixed;
   bottom: 0;
@@ -194,9 +347,7 @@ main {
   text-decoration: none;
 }
 
-/* ==========================================================================
-   Responsive Breakpoints
-   ========================================================================== */
+/*for tablet mobile device */
 
 /* Tablet (min-width: 600px) */
 @media screen and (min-width: 600px) {
@@ -213,7 +364,6 @@ main {
 /* Mobile (max-width: 599px) */
 @media screen and (max-width: 599px) {
   body {
-    /* Adjust top padding when navigation wraps into multiple rows */
     padding-top: 110px;
     padding-bottom: 75px;
   }
@@ -232,5 +382,9 @@ main {
     gap: 4px;
     text-align: center;
     padding: 8px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
   }
 }

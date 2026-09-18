@@ -1,84 +1,81 @@
-    <!DOCTYPE html>
-    <!--
-        Licensed to the Apache Software Foundation (ASF) under one
-        or more contributor license agreements.  See the NOTICE file
-        distributed with this work for additional information
-        regarding copyright ownership.  The ASF licenses this file
-        to you under the Apache License, Version 2.0 (the
-        "License"); you may not use this file except in compliance
-        with the License.  You may obtain a copy of the License at
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>johnryanuy.net - Homepage</title>
+    <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <nav class="site-nav" aria-label="Primary">
+                <a href="index.html">Homepage</a>
+                <a href="about.html">About</a>
+                <a href="skills.html">Skills</a>
+                <a href="projects.html">Projects</a>
+                <a href="contact.html">Contact</a>
+            </nav>  
+        </div>
+    </header>
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-        Unless required by applicable law or agreed to in writing,
-        software distributed under the License is distributed on an
-        "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-         KIND, either express or implied.  See the License for the
-        specific language governing permissions and limitations
-        under the License.
-    -->
-    <html>
-        <head>
-            <meta charset="utf-8">
-            <!--
-            Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-                https://cordova.apache.org/docs/en/latest/
-            Some notes:
-                * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-                * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                    * Enable inline JS: add 'unsafe-inline' to default-src
-            -->
-            <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-            <meta name="format-detection" content="telephone=no">
-            <meta name="msapplication-tap-highlight" content="no">
-            <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-            <meta name="color-scheme" content="light dark">
-            <link rel="stylesheet" href="css/index.css">
-            <title>johnryanuy.net</title>
-        </head>
-        <body>
-        <header class="site-header">
-            <div class="container">
-                <nav class="site-nav" aria-label="Primary">
-                    <!-- the nav links will navigate within same page, as of now no Javascript-->     
-                    <a href="index.html">Homepage</a>
-                    <a href="about.html">About</a>
-                    <a href="skills.html">Skills</a>    
-                    <a href="Education.html">Education</a>
-                    <a href="projects.html">Projects</a>
-                    <a href="contact.html">Contact</a>
-                </nav>  
+    <main class="container">
+        <section class="card profile-card">
+            <div class="profile-body">
+                <button type="button" id="open-edit-btn" class="btn btn-primary">Edit Basic Info</button>
+                <img class="profile-image" src="img/profile1.jpg" alt="Profile picture" width="320" height="320">
             </div>
-        </header>
-            <main id="about" class="container">
-                <section class="section">
-                    <h1>John Ryan Uy</h1>
-                    <h2> "Pursue wisdom like a hunter, and lie in wait on her paths." </h2>
-                    
-                    <p> 
-                        I am John Ryan Uy, I am 20 years old
-                        as of 2026 and residing in Cagayan de Oro City. 
-                    </p>
+            
+            <div class="profile-header-flex">
+                <div>
+                    <h1 id="display-name">John Ryan Uy</h1>
+                    <p id="display-course-year" class="subtitle">BS Information Technology - 3rd Year</p>
+                </div>
+            </div>
 
-                    <div>
-                        <img
-                            class="profile-image"
-                            src="img/profile1.jpg"
-                            alt="A simple profile icon"
-                            width="320"
-                            height="320"
-                        >
+            <h2 class="quote">"Pursue wisdom like a hunter, and lie in wait on her paths."</h2>
+        </section>
 
-        
-        <footer class = "site-footer">
-            <footer class="site-footer a" aria-label="Primary">
-            <a> Copyright @johnryanuy.net</a>
-            <a> John Ryan Uy</a>
-            <a> BSIT - 3</a>
-        </footer>
+        <!-- Edit Basic Info Modal -->
+        <div id="edit-modal" class="modal-overlay hidden">
+            <div class="modal-content card">
+                <h2>Edit Basic Info</h2>
+                
+                <div id="error-msg" class="error-banner hidden"></div>
 
+                <form id="edit-profile-form">
+                    <div class="form-group">
+                        <label for="edit-name">Full Name *</label>
+                        <input type="text" id="edit-name" class="form-control" placeholder="Enter Full Name" />
+                    </div>
 
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
-    </html>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="edit-course">Course *</label>
+                            <input type="text" id="edit-course" class="form-control" placeholder="e.g. BS Information Technology" />
+                        </div>
+                        <div class="form-group">
+                            <label for="edit-year">Year Level *</label>
+                            <input type="text" id="edit-year" class="form-control" placeholder="e.g. 3rd Year" />
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" id="save-btn" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <span>&copy; johnryanuy.net</span>
+        <span>John Ryan Uy</span>
+        <span>BSIT - 3</span>
+    </footer>
+
+    <script src="cordova.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
