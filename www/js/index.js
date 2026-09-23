@@ -13,22 +13,28 @@ const DEFAULT_PROFILE = {
     skills: "HTML, CSS, Responsive Layout, Debugging, JavaScript, Python",
     facebook: "https://www.facebook.com/johnryan.uy.501/",
     github: "https://github.com/uy-johnryan",
-    email: "johnryan.m.uy@gmail.com"
+    email: "johnryan.m.uy@gmail.com",
+    profilePicture: "img/profile1.jpg"
 };
 
 const STORAGE_KEY = "student_profile_data";
 
 function loadProfile() {
     const storedData = localStorage.getItem(STORAGE_KEY);
+
     if (storedData) {
         try {
-            return JSON.parse(storedData);
+            return {
+                ...DEFAULT_PROFILE,
+                ...JSON.parse(storedData)
+            };
         } catch (e) {
             console.error("Error parsing profile data:", e);
-            return DEFAULT_PROFILE;
+            return { ...DEFAULT_PROFILE };
         }
     }
-    return DEFAULT_PROFILE;
+
+    return { ...DEFAULT_PROFILE };
 }
 
 function saveProfile(profileData) {
@@ -36,6 +42,104 @@ function saveProfile(profileData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+
+    // 0. PROFILE PICTURE / CAMERA LOGIC
+    const changePictureBtn = document.getElementById("change-picture-btn");
+    const profilePicture = document.getElementById("profile-picture");
+    const cameraError = document.getElementById("camera-error");
+
+    if (changePictureBtn && profilePicture) {
+
+        function renderProfilePicture() {
+            const data = loadProfile();
+
+            if (data.profilePicture) {
+                profilePicture.src = data.profilePicture;
+            } else {
+                profilePicture.src = "img/profile1.jpg";
+            }
+        }
+
+        function showCameraError(message) {
+            if (cameraError) {
+                cameraError.textContent = message;
+                cameraError.classList.remove("hidden");
+            }
+        }
+
+        function hideCameraError() {
+            if (cameraError) {
+                cameraError.textContent = "";
+                cameraError.classList.add("hidden");
+            }
+        }
+
+        changePictureBtn.addEventListener("click", () => {
+
+            hideCameraError();
+
+            // Make sure Cordova's camera API is available
+            if (!navigator.camera) {
+                showCameraError(
+                    "Camera is unavailable. Please run the application on a Cordova device or emulator."
+                );
+                return;
+            }
+
+            navigator.camera.getPicture(
+                function(imageData) {
+
+                    // Camera successfully returned an image
+                    const current = loadProfile();
+
+                    // Save the captured image as a Base64 data URL
+                    current.profilePicture = "data:image/jpeg;base64," + imageData;
+
+                    saveProfile(current);
+
+                    // Immediately display the new picture
+                    profilePicture.src = current.profilePicture;
+
+                    hideCameraError();
+                },
+
+                function(error) {
+
+                    // Camera was cancelled
+                    if (
+                        error === "Camera cancelled." ||
+                        error === "No Image Selected" ||
+                        error === "Selection cancelled."
+                    ) {
+                        hideCameraError();
+                        return;
+                    }
+
+                    // Other camera errors
+                    console.error("Camera error:", error);
+
+                    showCameraError(
+                        "Unable to access the camera. Please check your device permissions."
+                    );
+                },
+
+                {
+                    quality: 70,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    encodingType: Camera.EncodingType.JPEG,
+                    mediaType: Camera.MediaType.PICTURE,
+                    targetWidth: 600,
+                    targetHeight: 600,
+                    correctOrientation: true,
+                    saveToPhotoAlbum: false
+                }
+            );
+        });
+
+        // Load saved profile picture when the page opens
+        renderProfilePicture();
+    }
 
     // 1. HOMEPAGE LOGIC
     const openEditBtn = document.getElementById("open-edit-btn");
