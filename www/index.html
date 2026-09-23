@@ -17,14 +17,29 @@
                 <a href="contact.html">Contact</a>
             </nav>  
         </div>
-    </header>
+    </header>       
 
     <main class="container">
         <section class="card profile-card">
+            
             <div class="profile-body">
                 <button type="button" id="open-edit-btn" class="btn btn-primary">Edit Basic Info</button>
-                <img class="profile-image" src="img/profile1.jpg" alt="Profile picture" width="320" height="320">
-            </div>
+                <img 
+                    id="profile-picture"
+                    class="profile-image" 
+                    src="img/profile1.jpg" 
+                    alt="Profile picture" 
+                    width="320" 
+                    height="320"
+                >
+
+                <button type="button" id="change-picture-btn" class="btn btn-primary">
+                    Change Profile Picture
+                </button>
+
+                <div id="camera-error" class="error-banner hidden"></div>
+            </div>  
+            
             
             <div class="profile-header-flex">
                 <div>
