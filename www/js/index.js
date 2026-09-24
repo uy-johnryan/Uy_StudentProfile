@@ -89,16 +89,30 @@ document.addEventListener("DOMContentLoaded", () => {
             navigator.camera.getPicture(
                 function(imageData) {
 
-                    // Camera successfully returned an image
-                    const current = loadProfile();
+                    console.log("Camera returned image data.");
+                    console.log("Image data length:", imageData ? imageData.length : 0);
 
-                    // Save the captured image as a Base64 data URL
-                    current.profilePicture = "data:image/jpeg;base64," + imageData;
+                    if (!imageData || imageData.length === 0) {
+                        showCameraError("The camera did not return an image.");
+                        return;
+                    }
+
+                    const imageSource = imageData;
+
+                    console.log("Image source created.");
+                    console.log("Image source length:", imageSource.length);
+                    console.log("Image data starts with:", imageData.substring(0, 30));
+
+                    const current = loadProfile();
+                    current.profilePicture = imageSource;
 
                     saveProfile(current);
 
-                    // Immediately display the new picture
-                    profilePicture.src = current.profilePicture;
+                    console.log("Profile picture saved.");
+
+                    profilePicture.src = imageSource;
+
+                    console.log("Profile picture src updated:", profilePicture.src);
 
                     hideCameraError();
                 },
