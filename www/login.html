@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Student Profile</title>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+            <h1>Student Login</h1>
+
+            <p>Please log in to access your profile.</p>
+
+            <div id="login-error" class="error-message"></div>
+
+            <form id="login-form">
+
+                <label for="student-id">
+                    Student ID
+                </label>
+
+                <input
+                    type="text"
+                    id="student-id"
+                    placeholder="Enter Student ID"
+                    required
+                >
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter Password"
+                    required
+                >
+
+                <button type="submit">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <script src="cordova.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+
+</body>
+
+</html>

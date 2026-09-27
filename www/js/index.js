@@ -2,6 +2,8 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+
+    loadProfileFromDatabase();
 }
 
 // Shared Default Data across all pages
@@ -17,34 +19,52 @@ const DEFAULT_PROFILE = {
     profilePicture: "img/profile1.jpg"
 };
 
-const STORAGE_KEY = "student_profile_data";
+
+let currentProfile = { ...DEFAULT_PROFILE };
+let profileLoaded = false;
 
 function loadProfile() {
-    const storedData = localStorage.getItem(STORAGE_KEY);
-
-    if (storedData) {
-        try {
-            return {
-                ...DEFAULT_PROFILE,
-                ...JSON.parse(storedData)
-            };
-        } catch (e) {
-            console.error("Error parsing profile data:", e);
-            return { ...DEFAULT_PROFILE };
-        }
-    }
-
-    return { ...DEFAULT_PROFILE };
+    return { ...currentProfile };
 }
 
-function saveProfile(profileData) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profileData));
+async function loadProfileFromDatabase() {
+    try {
+        const response = await apiRequest("/profile/me");
+
+        const data = response.profile;
+
+        currentProfile = {
+            fullName: data.full_name,
+            course: data.course,
+            yearLevel: data.year_level,
+            aboutMe: data.about_me,
+            skills: data.skills,
+            facebook: data.facebook,
+            github: data.github,
+            email: data.email,
+            profilePicture: data.profile_picture
+        };
+
+        profileLoaded = true;
+
+        console.log("Profile loaded from database:", currentProfile);
+
+        // Tell the page that the database profile is ready
+        document.dispatchEvent(new Event("profileLoaded"));
+
+    } catch (error) {
+        console.error("Profile retrieval error:", error);
+
+        alert(
+            "Unable to retrieve your profile from the database. Please try again."
+        );
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
 
     // 0. PROFILE PICTURE / CAMERA LOGIC
-    const changePictureBtn = document.getElementById("change-picture-btn");
+    const changePictureBtn = document.getElementById("change-picture-btn"); 
     const profilePicture = document.getElementById("profile-picture");
     const cameraError = document.getElementById("camera-error");
 
@@ -103,18 +123,35 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Image source length:", imageSource.length);
                     console.log("Image data starts with:", imageData.substring(0, 30));
 
-                    const current = loadProfile();
-                    current.profilePicture = imageSource;
+                    apiRequest("/profile/me/picture", {
+                        method: "PUT",
+                        body: JSON.stringify({
+                            profilePicture: imageSource
+                        })
+                    })
+                    .then(() => {
 
-                    saveProfile(current);
+                        currentProfile.profilePicture = imageSource;
 
-                    console.log("Profile picture saved.");
+                        console.log("Profile picture saved to database.");
 
-                    profilePicture.src = imageSource;
+                        profilePicture.src = imageSource;
 
-                    console.log("Profile picture src updated:", profilePicture.src);
+                        console.log("Profile picture src updated:", profilePicture.src);
 
-                    hideCameraError();
+                        hideCameraError();
+
+                        alert("Profile picture updated successfully.");
+
+                    })
+                    .catch((error) => {
+
+                        console.error("Profile picture update error:", error);
+
+                        showCameraError(
+                            "Unable to save the profile picture. Please try again."
+                        );
+                    });
                 },
 
                 function(error) {
@@ -208,7 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cancelBtn.addEventListener("click", () => editModal.classList.add("hidden"));
 
-        editForm.addEventListener("submit", (e) => {
+        editForm.addEventListener("submit", async  (e) => {
             e.preventDefault();
             const nameVal = editName.value.trim();
             const courseVal = editCourse.value.trim();
@@ -220,14 +257,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const current = loadProfile();
-            current.fullName = nameVal;
-            current.course = courseVal;
-            current.yearLevel = yearVal;
+            try {
+                await apiRequest("/profile/me", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        fullName: nameVal,
+                        course: courseVal,
+                        yearLevel: yearVal,
+                        aboutMe: currentProfile.aboutMe,
+                        skills: currentProfile.skills,
+                        facebook: currentProfile.facebook,
+                        github: currentProfile.github,
+                        email: currentProfile.email
+                    })
+                });
 
-            saveProfile(current);
-            renderHomepage();
-            editModal.classList.add("hidden");
+                currentProfile.fullName = nameVal;
+                currentProfile.course = courseVal;
+                currentProfile.yearLevel = yearVal;
+
+                renderHomepage();
+                editModal.classList.add("hidden");
+
+                alert("Profile Updated Successfully.");
+
+            } catch (error) {
+                console.error("Profile update error:", error);
+
+                errorMsg.textContent = error.message;
+                errorMsg.classList.remove("hidden");
+            }
         });
 
         renderHomepage();
@@ -257,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cancelAboutBtn.addEventListener("click", () => editAboutModal.classList.add("hidden"));
 
-        editAboutForm.addEventListener("submit", (e) => {
+        editAboutForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const aboutVal = editAboutInput.value.trim();
 
@@ -267,11 +326,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const current = loadProfile();
-            current.aboutMe = aboutVal;
-            saveProfile(current);
-            renderAbout();
-            editAboutModal.classList.add("hidden");
+            try {
+                await apiRequest("/profile/me", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        fullName: currentProfile.fullName,
+                        course: currentProfile.course,
+                        yearLevel: currentProfile.yearLevel,
+                        aboutMe: aboutVal,
+                        skills: currentProfile.skills,
+                        facebook: currentProfile.facebook,
+                        github: currentProfile.github,
+                        email: currentProfile.email
+                    })
+                });
+
+                currentProfile.aboutMe = aboutVal;
+
+                renderAbout();
+                editAboutModal.classList.add("hidden");
+
+                alert("Profile Updated Successfully.");
+
+            } catch (error) {
+                console.error("Profile update error:", error);
+
+                aboutErrorMsg.textContent = error.message;
+                aboutErrorMsg.classList.remove("hidden");
+            }
         });
 
         renderAbout();
@@ -310,7 +392,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cancelSkillsBtn.addEventListener("click", () => editSkillsModal.classList.add("hidden"));
 
-        editSkillsForm.addEventListener("submit", (e) => {
+        editSkillsForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const skillsVal = editSkillsInput.value.trim();
 
@@ -320,11 +402,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const current = loadProfile();
-            current.skills = skillsVal;
-            saveProfile(current);
-            renderSkills();
-            editSkillsModal.classList.add("hidden");
+            try {
+                await apiRequest("/profile/me", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        fullName: currentProfile.fullName,
+                        course: currentProfile.course,
+                        yearLevel: currentProfile.yearLevel,
+                        aboutMe: currentProfile.aboutMe,
+                        skills: skillsVal,
+                        facebook: currentProfile.facebook,
+                        github: currentProfile.github,
+                        email: currentProfile.email
+                    })
+                });
+
+                currentProfile.skills = skillsVal;
+
+                renderSkills();
+                editSkillsModal.classList.add("hidden");
+
+                alert("Profile Updated Successfully.");
+
+            } catch (error) {
+                console.error("Profile update error:", error);
+
+                skillsErrorMsg.textContent = error.message;
+                skillsErrorMsg.classList.remove("hidden");
+            }
         });
 
         renderSkills();
@@ -373,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cancelContactBtn.addEventListener("click", () => editContactModal.classList.add("hidden"));
 
-        editContactForm.addEventListener("submit", (e) => {
+        editContactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             const emailVal = editEmail.value.trim();
 
@@ -383,16 +488,84 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const current = loadProfile();
-            current.facebook = editFacebook.value.trim();
-            current.github = editGithub.value.trim();
-            current.email = emailVal;
+            try {
+                await apiRequest("/profile/me", {
+                    method: "PUT",
+                    body: JSON.stringify({
+                        fullName: currentProfile.fullName,
+                        course: currentProfile.course,
+                        yearLevel: currentProfile.yearLevel,
+                        aboutMe: currentProfile.aboutMe,
+                        skills: currentProfile.skills,
+                        facebook: editFacebook.value.trim(),
+                        github: editGithub.value.trim(),
+                        email: emailVal
+                    })
+                });
 
-            saveProfile(current);
-            renderContact();
-            editContactModal.classList.add("hidden");
+                currentProfile.facebook = editFacebook.value.trim();
+                currentProfile.github = editGithub.value.trim();
+                currentProfile.email = emailVal;
+
+                renderContact();
+                editContactModal.classList.add("hidden");
+
+                alert("Profile Updated Successfully.");
+
+            } catch (error) {
+                console.error("Profile update error:", error);
+
+                contactErrorMsg.textContent = error.message;
+                contactErrorMsg.classList.remove("hidden");
+            }
         });
 
         renderContact();
     }
-});
+    // Refresh the page when the database profile has finished loading
+    document.addEventListener("profileLoaded", () => {
+
+        if (document.getElementById("display-name")) {
+            renderHomepage();
+        }
+
+        if (document.getElementById("display-about-text")) {
+            renderAbout();
+        }
+
+        if (document.getElementById("display-skills-list")) {
+            renderSkills();
+        }
+
+        if (document.getElementById("contact-email")) {
+            renderContact();
+        }
+
+        // Refresh profile picture if this page has one
+        const profilePicture = document.getElementById("profile-picture");
+
+        if (profilePicture && currentProfile.profilePicture) {
+            profilePicture.src = currentProfile.profilePicture;
+        }
+    });
+
+    // If the database finished loading before this listener was added
+    if (profileLoaded) {
+
+        if (document.getElementById("display-name")) {
+            renderHomepage();
+        }
+
+        if (document.getElementById("display-about-text")) {
+            renderAbout();
+        }
+
+        if (document.getElementById("display-skills-list")) {
+            renderSkills();
+        }
+
+        if (document.getElementById("contact-email")) {
+            renderContact();
+        }
+    }
+}); 
